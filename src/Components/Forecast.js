@@ -11,7 +11,7 @@ export default function Forecast() {
         fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
 	    "method": "GET",
 	    "headers": {
-		        "x-rapidapi-key": "8118f2e313msh16bc8122e66008dp1d3897jsn6b296224e5d6",
+		        "x-rapidapi-key": process.env.REACT_APP_API_KEY,
 		        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
 	            }
             })
