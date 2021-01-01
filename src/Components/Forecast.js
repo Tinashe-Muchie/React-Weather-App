@@ -1,35 +1,61 @@
 import React, {useState} from 'react';
+import Display from './Display';
 
 export default function Forecast() {
     const [responseObj ,setResponseObj] = useState({});
-    function getForecast(){
-        fetch("https://community-open-weather-map.p.rapidapi.com/weather?q=London", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "8118f2e313msh16bc8122e66008dp1d3897jsn6b296224e5d6",
-		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
-	}
-})
-.then(response => response.json())
-.then(response => {
-    setResponseObj(response)
-})
-.catch(err => {
-	console.error(err);
-});
-        
-    }
+    let [city, setCity] = useState('');
+    const uriEncodedCity = encodeURIComponent(city)
+    let [unit, setUnit] = useState('imperial');
+    
+    function getForecast(e){
+        fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
+	    "method": "GET",
+	    "headers": {
+		        "x-rapidapi-key": "8118f2e313msh16bc8122e66008dp1d3897jsn6b296224e5d6",
+		        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
+	            }
+            })
+            .then(response => response.json())
+            .then(response => {
+                            setResponseObj(response)
+                            })
+            .catch(err => {
+	                    console.error(err);
+            });
+        e.preventDefault();
+        }
     return (
         
         <div>   
            <>
-            {JSON.stringify(responseObj)}
-            <input type='text' placeholder = 'type in your city'></input><br/>
-            <input type='radio' id="fahrenheit" name='units' value='Fahrenheit' />
-            <label for='fahrenheit'>Fahrenheit</label>
-            <input type='radio' id='celcius' name='units' value='Celcius' />
-            <label for='celcius'>Celsius</label><br />
-            <input type='button' value='Get Forecast' onClick={getForecast} />
+           <form onSubmit={getForecast}>
+                <input
+                    type="text"
+                    placeholder="Enter City"
+                    maxLength="50"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    /><br />
+                <input
+                    type="radio"
+                    name="units"
+                    checked={unit === "imperial"}
+                    value="imperial"
+                    onChange={(e) => setUnit(e.target.value)}
+                    />  
+                <label>Fahrenheit</label>
+                <input
+                    type="radio"
+                    name="units"
+                    checked={unit === "metric"}
+                    value="metric"
+                    onChange={(e) => setUnit(e.target.value)}
+                    />
+                <label>Celcius</label><br />
+                <button type="submit">Get Forecast</button>
+
+            </form> 
+            <Display responseObj={responseObj} />
            </> 
         </div>
     )
