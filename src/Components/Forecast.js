@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Display from './Display';
+import Form from './Form';
 
 export default function Forecast() {
     const [responseObj ,setResponseObj] = useState({});
@@ -7,7 +8,7 @@ export default function Forecast() {
     const uriEncodedCity = encodeURIComponent(city)
     let [unit, setUnit] = useState('imperial');
     
-    function getForecast(e){
+    function getWeather(e){
         fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
 	    "method": "GET",
 	    "headers": {
@@ -27,36 +28,8 @@ export default function Forecast() {
     return (
         
         <div>   
-           <>
-           <form onSubmit={getForecast}>
-                <input
-                    type="text"
-                    placeholder="Enter City"
-                    maxLength="50"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    /><br />
-                <input
-                    type="radio"
-                    name="units"
-                    checked={unit === "imperial"}
-                    value="imperial"
-                    onChange={(e) => setUnit(e.target.value)}
-                    />  
-                <label>Fahrenheit</label>
-                <input
-                    type="radio"
-                    name="units"
-                    checked={unit === "metric"}
-                    value="metric"
-                    onChange={(e) => setUnit(e.target.value)}
-                    />
-                <label>Celcius</label><br />
-                <button type="submit">Get Forecast</button>
-
-            </form> 
+            <Form unit={unit} city={city} setCity={setCity} setUnit={setUnit} getWeather={getWeather} />
             <Display responseObj={responseObj} />
-           </> 
         </div>
     )
 }
