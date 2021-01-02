@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Forecast from './Components/Forecast';
-import Forecast5 from './Components/Forecast5';
 
 function App() {
   
@@ -9,7 +8,6 @@ function App() {
     <>
     <h1>Weather App</h1>
     <Forecast />
-    <Forecast5 />
     </>     
   );
 }
