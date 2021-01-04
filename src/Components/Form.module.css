@@ -1,0 +1,25 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.inputText {
+    border-style: solid;
+    border-radius: 5px;
+    padding: 8px;
+    width: 25%;
+}
+.Radio {
+    display:flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items:center;
+}
+.Button {
+    border: hidden;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bolder;
+}
