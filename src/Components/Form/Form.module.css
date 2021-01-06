@@ -16,10 +16,13 @@
     flex-direction: row;
     justify-items: center;
     align-items:center;
+    color:honeydew;
 }
 .Button {
     border: hidden;
     border-radius: 5px;
     padding: 10px;
     font-weight: bolder;
+    color:honeydew;
+    background-color: rgba(0, 0, 0, 0.288);
 }

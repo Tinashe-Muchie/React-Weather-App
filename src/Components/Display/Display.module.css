@@ -1,0 +1,14 @@
+.Display{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(179, 47, 255, 0.233);
+    border-radius: 10px;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 3%;
+    padding: 2%;
+    font-family: 'Times New Roman', Times, serif;
+    color:honeydew;
+}

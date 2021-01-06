@@ -1,0 +1,10 @@
+footer {
+    color:honeydew;
+    position: fixed;
+    bottom: 2%;
+    right: 3%;
+    border: hidden;
+    border-radius: 10px;
+    background-color: skyblue;
+    padding: 1%;
+}

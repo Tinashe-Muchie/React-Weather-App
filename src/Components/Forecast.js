@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Display from './Display';
-import Form from './Form';
+import Display from './Display/Display';
+import Form from './Form/Form';
 
 export default function Forecast() {
     const [responseObj ,setResponseObj] = useState({});
@@ -12,7 +12,7 @@ export default function Forecast() {
         fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
 	    "method": "GET",
 	    "headers": {
-		        "x-rapidapi-key": process.env.REACT_APP_API_KEY,
+		        "x-rapidapi-key": "8118f2e313msh16bc8122e66008dp1d3897jsn6b296224e5d6"/*process.env.REACT_APP_API_KEY*/,
 		        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
 	            }
             })
