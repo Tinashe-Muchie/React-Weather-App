@@ -5,31 +5,50 @@ import Form from './Form/Form';
 export default function Forecast() {
     const [responseObj ,setResponseObj] = useState({});
     let [city, setCity] = useState('');
-    const uriEncodedCity = encodeURIComponent(city)
     let [unit, setUnit] = useState('imperial');
+    let [error, setError] = useState(false);
+    let [loading, setLoading] = useState(false);
     
     function getWeather(e){
+        e.preventDefault();
+
+        if (city.length === 0){
+            return setError(true);
+        }
+        
+        setError(false);
+        setResponseObj({});
+        setLoading(true);
+
+        const uriEncodedCity = encodeURIComponent(city)
+
         fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
 	    "method": "GET",
 	    "headers": {
-		        "x-rapidapi-key": process.env.REACT_APP_API_KEY,
+		        "x-rapidapi-key":"8118f2e313msh16bc8122e66008dp1d3897jsn6b296224e5d6" /*process.env.REACT_APP_API_KEY*/,
 		        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
 	            }
             })
             .then(response => response.json())
             .then(response => {
-                            setResponseObj(response)
+                            if  (response.cod !==200){
+                                throw new Error();
+                            }
+                            setResponseObj(response);
+                            setLoading(false);
                             })
             .catch(err => {
-	                    console.error(err);
+                setError(true);
+                setLoading(false);
+	            console.error(err);
             });
-        e.preventDefault();
+        
         }
     return (
         
         <div>   
             <Form unit={unit} city={city} setCity={setCity} setUnit={setUnit} getWeather={getWeather} />
-            <Display responseObj={responseObj} />
+            <Display responseObj={responseObj} error={error} loading={loading}/>
         </div>
     )
 }

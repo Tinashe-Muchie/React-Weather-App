@@ -2,7 +2,6 @@ import React from 'react'
 import classes from './Form.module.css'
 
 export default function Form(props) {
-   
     return (
         <div>
            <>
